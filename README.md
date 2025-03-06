@@ -20,12 +20,15 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [google_compute_network.vpc_network](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_network) | resource |
+| [google_compute_network.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_network) | resource |
+| [google_compute_subnetwork.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_subnetwork) | resource |
+| [google_container_cluster.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/container_cluster) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | GKE cluster name | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | GCP project id | `string` | `"florenciacomuzzi"` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"us-east1"` | no |
 | <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | VPC network name | `string` | n/a | yes |
