@@ -1,4 +1,5 @@
-name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
+---
+name: "Terraform CICD"
 
 on:
  push:
@@ -96,7 +97,7 @@ jobs:
             else
              echo "unsupported environment";
             fi
-         terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
+            terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
        continue-on-error: true
 
      - name: Terraform plan [push]
@@ -110,7 +111,7 @@ jobs:
             else
              echo "unsupported environment";
             fi
-         terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
+            terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
        continue-on-error: true
 
      - uses: actions/github-script@v6
