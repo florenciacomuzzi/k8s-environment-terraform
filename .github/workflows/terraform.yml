@@ -154,4 +154,12 @@ jobs:
 
      - name: Terraform Apply
        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       run: terraform apply -auto-approve -input=false
+       run: |
+            if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
+             export ENV="dev";
+            elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
+             export ENV="prod";
+            else
+             echo "unsupported environment";
+            fi
+            terraform apply -var-file=variables/$ENV.auto.tfvars -auto-approve -lock=false
