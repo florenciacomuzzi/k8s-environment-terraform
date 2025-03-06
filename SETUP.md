@@ -11,7 +11,9 @@ Deployments are triggered from GitHub Actions workflows.
 * Create a service account JSON file.
 * Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
 * Create the buckets for Terraform state like `prod-tf-state-bucket`. The bucket names are specified in the `backend/{env}.tfvars` file.
-* Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > Storage Object Admin.
+* Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > 
+  * Storage Object Admin
+  * Compute Network Admin
 * Enable the Compute Engine API if it is not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
 
 ### GitHub
