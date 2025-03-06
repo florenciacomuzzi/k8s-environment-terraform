@@ -120,13 +120,13 @@ jobs:
      - uses: actions/github-script@v6
        if: github.event_name == 'pull_request'
        env:
-         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+         PLAN: "terraform\n${{ steps.plan-pr.outputs.stdout }}"
        with:
          script: |
            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-           #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+           #### Terraform Initialization ⚙️\`${{ steps.init-pr.outcome }}\`
            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-           #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+           #### Terraform Plan 📖\`${{ steps.plan-pr.outcome }}\`
  
            <details><summary>Show Plan</summary>
  
