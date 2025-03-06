@@ -55,7 +55,7 @@ jobs:
            else
             echo "unsupported environment";
            fi
-           terraform init -upgrade -backend-config=backend/${ENV}.tfvars --reconfigure || exit 1
+           terraform init -upgrade -backend-config=backend/$ENV.tfvars --reconfigure || exit 1
 
      - name: Terraform format
        id: fmt
