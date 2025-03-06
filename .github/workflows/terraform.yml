@@ -26,7 +26,7 @@ env:
 
 jobs:
  terraform:
-   name: "Terraform Infrastructure Change Management"
+   name: "Terraform CICD"
    runs-on: ubuntu-latest
    permissions:
      pull-requests: write  # Required for creating or updating PRs
@@ -72,9 +72,9 @@ jobs:
        id: init-push
        if: github.event_name == 'push'
        run: |
-           if [ "${{ github.ref }}" == "develop" ]; then
+           if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
             export ENV="dev";
-           elif [ "${{ github.ref }}" == "main" ]; then
+           elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
             export ENV="prod";
            else
             echo "unsupported environment";
