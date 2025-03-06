@@ -6,7 +6,7 @@ env:
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "production" # template field
   CONFIG_DIRECTORY: "./"
-  TF_ENVIRONMENT: ${{ github.base_ref }}
+  TARGET_BRANCH: ${{ github.base_ref }}
 jobs:
   tflint:
     name: "TFLint"
@@ -20,8 +20,8 @@ jobs:
     - uses: actions/checkout@v4
       name: Checkout source code
 
-    - name: Show ENVIRONMENT
-      run: echo $TF_ENVIRONMENT
+    - name: Show TARGET_BRANCH
+      run: echo $TARGET_BRANCH
 
     - uses: actions/cache@v4
       name: Cache plugin dir
@@ -46,7 +46,6 @@ jobs:
     - name: Run TFLint
       run: tflint -f compact
   terraform:
-    if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
     name: "Terraform Plan"
     runs-on: ubuntu-latest
     permissions:
