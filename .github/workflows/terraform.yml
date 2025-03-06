@@ -62,7 +62,20 @@ jobs:
            else
             echo "unsupported environment";
            fi
-           terraform init -upgrade -backend-config=backend/$ENV.tfvars --reconfigure || exit 1
+           terraform init -upgrade -backend-config=backend/$ENV.tfvars --reconfigure
+
+     - name: Terraform init [push]
+       id: init-push
+       if: github.event_name == 'push'
+       run: |
+           if [ "${{ github.ref }}" == "develop" ]; then
+            export ENV="dev";
+           elif [ "${{ github.ref }}" == "main" ]; then
+            export ENV="prod";
+           else
+            echo "unsupported environment";
+           fi
+           terraform init -upgrade -backend-config=backend/$ENV.tfvars --reconfigure
 
      - name: Terraform format
        id: fmt
@@ -72,10 +85,32 @@ jobs:
        id: validate
        run: terraform validate
 
-     - name: Terraform plan
-       id: plan
+     - name: Terraform plan [pull_request]
+       id: plan-pr
        if: github.event_name == 'pull_request'
-       run: terraform plan -no-color -input=false
+       run: |
+            if [ "${{ github.event.pull_request.base.ref }}" == "develop" ]; then
+             export ENV="dev";
+            elif [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
+             export ENV="prod";
+            else
+             echo "unsupported environment";
+            fi
+         terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
+       continue-on-error: true
+
+     - name: Terraform plan [push]
+       id: plan-push
+       if: github.event_name == 'push'
+       run: |
+            if [ "${{ github.ref }}" == "develop" ]; then
+             export ENV="dev";
+            elif [ "${{ github.ref }}" == "main" ]; then
+             export ENV="prod";
+            else
+             echo "unsupported environment";
+            fi
+         terraform plan -input=false -var-file=variables/$ENV.auto.tfvars -lock=false
        continue-on-error: true
 
      - uses: actions/github-script@v6
@@ -105,8 +140,12 @@ jobs:
              body: output
            })
 
+     - name: Terraform Plan Status [pull_request]
+       if: github.event_name == 'pull_request' && steps.plan-pr.outcome == 'failure'
+       run: exit 1
+
      - name: Terraform Plan Status
-       if: steps.plan.outcome == 'failure'
+       if: github.event_name == 'push' && steps.plan-push.outcome == 'failure'
        run: exit 1
 
      - name: Terraform Apply
