@@ -5,29 +5,14 @@ Deployments are triggered from GitHub Actions workflows.
 
 ## Setting up your own project
 
-### GCP
+### [Owners] GCP
 * Login to GCP account.
 * Create a service account like `k8s-environment-terraform-cicd` to use for CICD.
 * Create a service account JSON file.
 * Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
 * Create the buckets for Terraform state like `prod-tf-state-bucket`. The bucket names are specified in the `backend/{env}.tfvars` file.
 * Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > Storage Object Admin.
-
-### Linode
-* Login to Linode account. 
-* Create a personal access token. This secret is the value of "token" input variable of the Terraform module.
-
-### Terraform Cloud
-* Login to Terraform Cloud.
-* Create an organization like "mysite-org".
-* Create a Team Token scoped to owners. This secret is the value of TF_API_TOKEN used by GitHub Actions to authenticate to Hashicorp Terraform Cloud.
-* Create a variable set called "MYSITE__PRODUCTION".
-* Add the following variables to the set:
-  * khj
-* Create a project like "mysite-site".
-* Create a workspace like "production".
-* In the workspace, create a workspace variable called "token" with the value of the Linode Personal Access Token.
-* Go back to the organization-level variable set you created previously and apply to the workspace specifically.
+* Enable the Compute Engine API if it is not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
 
 ### GitHub
 * Clone this repository. Name it like "mysite-site-terraform".
