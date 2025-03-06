@@ -107,9 +107,9 @@ jobs:
        id: plan-push
        if: github.event_name == 'push'
        run: |
-            if [ "${{ github.ref }}" == "develop" ]; then
+            if [ "${{ github.ref }}" == "refs/heads/develop" ]; then
              export ENV="dev";
-            elif [ "${{ github.ref }}" == "main" ]; then
+            elif [ "${{ github.ref }}" == "refs/heads/main" ]; then
              export ENV="prod";
             else
              echo "unsupported environment";
