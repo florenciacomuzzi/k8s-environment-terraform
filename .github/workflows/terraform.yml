@@ -47,9 +47,11 @@ jobs:
        if: github.event_name == 'pull_request'
        run: |
            if [ ${{ github.event.pull_request.base.ref }} == "develop" ]; then
-            export ENV = "dev";
+            ENV = "dev";
+            export ENV;
            elif [ ${{ github.event.pull_request.base.ref }} == "main" ]; then
-            export ENV = "prod";
+            ENV = "prod";
+            export ENV;
            else
             echo "unsupported environment";
            fi
