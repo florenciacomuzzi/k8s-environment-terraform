@@ -5,6 +5,11 @@ Deployments are triggered from GitHub Actions workflows.
 
 ## Setting up your own project
 
+### GCP
+* Login to GCP account.
+* Create a service account like `k8s-environment-terraform-cicd` to use for CICD.
+* Create a service account JSON file.
+
 ### Linode
 * Login to Linode account. 
 * Create a personal access token. This secret is the value of "token" input variable of the Terraform module.
