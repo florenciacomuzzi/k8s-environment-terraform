@@ -21,6 +21,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [google_compute_network.vpc_network](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_network) | resource |
+| [google_project_service.compute_engine](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/project_service) | resource |
 
 ## Inputs
 
