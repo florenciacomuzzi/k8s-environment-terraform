@@ -14,7 +14,14 @@ Deployments are triggered from GitHub Actions workflows.
 * Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > 
   * Storage Object Admin
   * Compute Network Admin
-* Enable the Compute Engine API if it is not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
+  * Kubernetes Engine Cluster Admin
+* Enable the following APIs if not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
+  * Compute Engine API
+  * Kubernetes Engine API
+* Allow the CICD service account access to the default Compute Engine service account 
+like `454824995744-compute@developer.gserviceaccount.com`. Go to IAM & Admin > Service Accounts > 
+`{project-number}-compute@developer.gserviceaccount.com` > Permissions > Grant Access > {cicd service account email} > Role > ServiceAccountUser
+  * You can find your project number by going to Cloud Console > Cloud overview > Dashboard.
 
 ### GitHub
 * Clone this repository. Name it like "mysite-site-terraform".
