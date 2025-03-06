@@ -1,15 +1,16 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | 2.34.1 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | 6.24.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | 2.34.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | 6.24.0 |
 
 ## Modules
 
@@ -19,14 +20,17 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [linode_instance.web](https://registry.terraform.io/providers/linode/linode/2.34.1/docs/resources/instance) | resource |
+| [google_compute_network.vpc_network](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_network) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_token"></a> [token](#input\_token) | Linode API Token | `string` | n/a | yes |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | GCP project id | `string` | `"florenciacomuzzi"` | no |
+| <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"us-east1"` | no |
+| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | VPC network name | `string` | n/a | yes |
 
 ## Outputs
 
 No outputs.
+<!-- END_TF_DOCS -->
