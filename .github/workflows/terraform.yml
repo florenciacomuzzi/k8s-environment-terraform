@@ -46,10 +46,10 @@ jobs:
        id: init-pr
        if: github.event_name == 'pull_request'
        run: |
-           if [ ${{ github.event.pull_request.base.ref }} == "develop" ]; then
+           if [ "${{ github.event.pull_request.base.ref }}" == "develop" ]; then
             ENV = "dev";
             export ENV;
-           elif [ ${{ github.event.pull_request.base.ref }} == "main" ]; then
+           elif [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
             ENV = "prod";
             export ENV;
            else
