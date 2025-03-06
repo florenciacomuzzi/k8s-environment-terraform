@@ -43,9 +43,9 @@ jobs:
          terraform_version: 1.3.0
 
      - name: Terraform init [pull_request]
-       id: init-dev
+       id: init-pr
        if: github.event_name == 'pull_request'
-       with:
+       run:
          script: |
            if [ ${{ github.event.pull_request.base.ref }} == "develop" ]; then
             ENV = "dev";
