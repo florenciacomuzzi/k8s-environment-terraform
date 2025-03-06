@@ -20,3 +20,8 @@ variable "vpc_name" {
   type        = string
   description = "VPC network name"
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "GKE cluster name"
+}
