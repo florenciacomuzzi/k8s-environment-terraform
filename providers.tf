@@ -3,7 +3,7 @@ terraform {
   # change to google
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "6.24.0"
     }
   }
@@ -15,6 +15,6 @@ terraform {
 #   # token = var.token
 # }
 provider "google" {
-  project     = var.project_id
-  region      = var.region
+  project = var.project_id
+  region  = var.region
 }
