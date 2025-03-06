@@ -5,6 +5,14 @@ Deployments are triggered from GitHub Actions workflows.
 
 ## Setting up your own project
 
+### GCP
+* Login to GCP account.
+* Create a service account like `k8s-environment-terraform-cicd` to use for CICD.
+* Create a service account JSON file.
+* Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
+* Create the buckets for Terraform state like `prod-tf-state-bucket`. The bucket names are specified in the `backend/{env}.tfvars` file.
+* Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > Storage Object Admin.
+
 ### Linode
 * Login to Linode account. 
 * Create a personal access token. This secret is the value of "token" input variable of the Terraform module.
