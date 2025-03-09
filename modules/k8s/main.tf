@@ -1,5 +1,15 @@
+resource "random_string" "identifier" {
+  length           = 5
+  special          = true
+  upper            = true
+  lower            = true
+  numeric          = true
+  override_special = "123456789"
+}
+
+
 resource "google_service_account" "default" {
-  account_id   = "${var.cluster_name}-k8s-sa"
+  account_id   = "k8s-sa-${random_string.identifier.result}"
   display_name = "Node pool service account"
 }
 
