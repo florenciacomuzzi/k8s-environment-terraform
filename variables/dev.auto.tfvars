@@ -1,4 +1,6 @@
 project_id = "florenciacomuzzi"
 region     = "us-east1"
-vpc_name   = "florenciacomuzzi-vpc-dev"
+network_name   = "florenciacomuzzi-vpc-dev"
+subnet_name  = "my-subnet"
 cluster_name = "florenciacomuzzi-cluster-dev"
+subnet_cidr = "10.0.0.0/12"

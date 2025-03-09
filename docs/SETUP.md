@@ -1,4 +1,4 @@
-# florenciacomuzzi-site-terraform
+# k8s-environment-terraform
 This repository contains Terraform code to create a Linode instance and deploy a website to it.
 The infrastructure is managed using Hashicorp Terraform Cloud. 
 Deployments are triggered from GitHub Actions workflows.
@@ -9,7 +9,6 @@ Deployments are triggered from GitHub Actions workflows.
 * Login to GCP account.
 * Create a service account like `k8s-environment-terraform-cicd` to use for CICD.
 * Create a service account JSON file.
-* Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
 * Create the buckets for Terraform state like `prod-tf-state-bucket`. The bucket names are specified in the `backend/{env}.tfvars` file.
 * Go to the bucket > Permissions > Add Member > Service Account > k8s-environment-terraform-cicd@florenciacomuzzi.iam.gserviceaccount.com > Role > 
   * Storage Object Admin
@@ -25,7 +24,7 @@ like `454824995744-compute@developer.gserviceaccount.com`. Go to IAM & Admin > S
 
 ### GitHub
 * Clone this repository. Name it like "mysite-site-terraform".
-* Create a TF_API_TOKEN repository secret by going to Settings > Secrets and variables > Actions. This secret is used by GitHub Actions to authenticate to Hashicorp Terraform Cloud during runs.
+* Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
 * Change the values of TF_CLOUD_ORGANIZATION and TF_WORKSPACE in .github/workflows/terraform-apply.yml and .github/workflows/terraform-plan.yml.
 
 

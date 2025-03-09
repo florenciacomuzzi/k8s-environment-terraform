@@ -1,4 +1,5 @@
 project_id = "florenciacomuzzi"
 region = "us-east1"
-vpc_name = "prod"
+vpc_name = "florenciacomuzzi-vpc-prod"
 cluster_name = "florenciacomuzzi-cluster-prod"
+ip_cidr_range = "10.0.0.0/12"

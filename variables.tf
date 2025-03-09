@@ -1,9 +1,3 @@
-# variable "token" {
-#   sensitive   = true
-#   type        = string
-#   description = "Linode API Token"
-# }
-
 variable "project_id" {
   type        = string
   default     = "florenciacomuzzi"
@@ -16,12 +10,22 @@ variable "region" {
   description = "GCP region"
 }
 
-variable "vpc_name" {
+variable "network_name" {
+  description = "The name of the VPC network"
   type        = string
-  description = "VPC network name"
+}
+
+variable "subnet_name" {
+  description = "The name of the subnet"
+  type        = string
+}
+
+variable "subnet_cidr" {
+  description = "The CIDR block for the subnet"
+  type        = string
 }
 
 variable "cluster_name" {
+  description = "The name of the GKE cluster"
   type        = string
-  description = "GKE cluster name"
 }

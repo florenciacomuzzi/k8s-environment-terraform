@@ -9,12 +9,12 @@ terraform {
   }
 }
 
-# Configure the Linode Provider
-# set google provider knowing that auth is handled by environment variable
-# provider "linode" {
-#   # token = var.token
-# }
 provider "google" {
   project = var.project_id
   region  = var.region
+  default_labels = {
+    infrastructure = "crossing-the-narrow-bridge"
+  }
+  add_terraform_attribution_label               = true
+  terraform_attribution_label_addition_strategy = "PROACTIVE"
 }
