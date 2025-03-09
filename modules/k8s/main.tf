@@ -23,4 +23,5 @@ resource "google_container_node_pool" "gke_nodes" {
     disk_size_gb = 100
     oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
+  depends_on = [google_container_cluster.gke_cluster]
 }
