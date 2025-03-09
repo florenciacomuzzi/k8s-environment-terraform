@@ -1,6 +1,5 @@
 variable "project_id" {
   type        = string
-  default     = "florenciacomuzzi"
   description = "GCP project id"
 }
 
@@ -25,11 +24,6 @@ variable "subnet_cidr" {
   type        = string
 }
 
-# variable "cluster_name" {
-#   description = "The name of the GKE cluster"
-#   type        = string
-# }
-
 variable "cluster_secondary_range_name" {
   type        = string
   default     = "gke-pods"
@@ -44,6 +38,7 @@ variable "services_secondary_range_name" {
 
 variable "cluster_secondary_range_cidr" {
   type        = string
+  default     = "10.20.0.0/16"
   description = "The secondary range to use for pods"
 }
 
