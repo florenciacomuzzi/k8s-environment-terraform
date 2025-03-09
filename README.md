@@ -8,30 +8,29 @@
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | 6.24.0 |
+No providers.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_gke_public"></a> [gke\_public](#module\_gke\_public) | terraform-google-modules/kubernetes-engine/google | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-google-modules/network/google | n/a |
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [google_compute_network.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_network) | resource |
-| [google_compute_subnetwork.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/compute_subnetwork) | resource |
-| [google_container_cluster.default](https://registry.terraform.io/providers/hashicorp/google/6.24.0/docs/resources/container_cluster) | resource |
+No resources.
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | GKE cluster name | `string` | n/a | yes |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the GKE cluster | `string` | n/a | yes |
+| <a name="input_network_name"></a> [network\_name](#input\_network\_name) | The name of the VPC network | `string` | n/a | yes |
 | <a name="input_project_id"></a> [project\_id](#input\_project\_id) | GCP project id | `string` | `"florenciacomuzzi"` | no |
 | <a name="input_region"></a> [region](#input\_region) | GCP region | `string` | `"us-east1"` | no |
-| <a name="input_vpc_name"></a> [vpc\_name](#input\_vpc\_name) | VPC network name | `string` | n/a | yes |
+| <a name="input_subnet_cidr"></a> [subnet\_cidr](#input\_subnet\_cidr) | The CIDR block for the subnet | `string` | n/a | yes |
+| <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | The name of the subnet | `string` | n/a | yes |
 
 ## Outputs
 

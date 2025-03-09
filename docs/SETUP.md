@@ -17,6 +17,7 @@ Deployments are triggered from GitHub Actions workflows.
 * Enable the following APIs if not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
   * Compute Engine API
   * Kubernetes Engine API
+  * Cloud Resource Manager API
 * Allow the CICD service account access to the default Compute Engine service account 
 like `454824995744-compute@developer.gserviceaccount.com`. Go to IAM & Admin > Service Accounts > 
 `{project-number}-compute@developer.gserviceaccount.com` > Permissions > Grant Access > {cicd service account email} > Role > ServiceAccountUser
