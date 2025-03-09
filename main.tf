@@ -19,7 +19,5 @@ module "gke" {
   subnet_name                   = var.subnet_name
   cluster_name                  = var.cluster_name
   cluster_secondary_range_name  = var.cluster_secondary_range_name
-  cluster_secondary_range_cidr  = var.cluster_secondary_range_cidr
   services_secondary_range_name = var.services_secondary_range_name
-  services_secondary_range_cidr = var.services_secondary_range_cidr
 }
