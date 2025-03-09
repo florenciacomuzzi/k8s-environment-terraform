@@ -9,9 +9,9 @@ module "gke_public" {
   ip_range_pods     = "gke-pods"
   ip_range_services = "gke-services"
 
-  enable_private_nodes     = false # Public cluster
-  enable_private_endpoint  = false # Public API endpoint
-  enable_ip_masq_agent     = true
+  # enable_private_nodes     = false # Public cluster
+  # enable_private_endpoint  = false # Public API endpoint
+  # enable_ip_masq_agent     = true
   remove_default_node_pool = true
 
   node_pools = [
