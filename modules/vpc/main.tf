@@ -1,7 +1,7 @@
 # Create a VPC Network
 resource "google_compute_network" "vpc" {
-  name                    = var.network_name
-  auto_create_subnetworks = false
+  name                     = var.network_name
+  auto_create_subnetworks  = false
   enable_ula_internal_ipv6 = true
 }
 
