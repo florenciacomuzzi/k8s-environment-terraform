@@ -50,7 +50,7 @@ variable "cluster_secondary_range_cidr" {
 variable "services_secondary_range_cidr" {
   type        = string
   default     = "10.30.0.0/16"
-  description = "The name of the secondary range to use for services"
+  description = "The secondary range to use for services"
 }
 
 variable "cluster_name" {
