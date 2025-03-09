@@ -2,6 +2,7 @@
 resource "google_compute_network" "vpc" {
   name                    = var.network_name
   auto_create_subnetworks = false
+  enable_ula_internal_ipv6 = true
 }
 
 # Create a Subnet for GKE with Secondary Ranges
