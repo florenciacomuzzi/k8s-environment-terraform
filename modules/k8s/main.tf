@@ -13,10 +13,10 @@ resource "google_service_account" "default" {
 }
 
 resource "google_container_cluster" "gke_cluster" {
-  name                     = var.cluster_name
-  location                 = var.region
-  network                  = var.network_name
-  subnetwork               = var.subnet_name
+  name       = var.cluster_name
+  location   = var.region
+  network    = var.network_name
+  subnetwork = var.subnet_name
 
   ip_allocation_policy {
     cluster_secondary_range_name  = var.cluster_secondary_range_name
@@ -38,9 +38,9 @@ resource "google_container_node_pool" "gke_nodes" {
   node_count = 3
 
   node_config {
-    machine_type = "e2-standard-2"
-    disk_size_gb = 100
-    oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+    machine_type    = "e2-standard-2"
+    disk_size_gb    = 100
+    oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.default.email
   }
   depends_on = [google_container_cluster.gke_cluster]
