@@ -43,4 +43,17 @@ module "vpc" {
       subnet_region = var.region
     }
   ]
+  secondary_ranges = {
+    subnet-01 = [
+        {
+            range_name    = "services"
+            ip_cidr_range = "192.168.0.0/24"
+        },
+        {
+            range_name    = "pods"
+            ip_cidr_range = "192.168.64.0/24"
+        },
+    ]
+    subnet-02 = []
+  }
 }
