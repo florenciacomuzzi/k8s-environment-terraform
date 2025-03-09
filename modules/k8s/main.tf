@@ -1,3 +1,8 @@
+resource "google_service_account" "default" {
+  account_id   = "${var.cluster_name}-k8s-sa"
+  display_name = "Node pool service account"
+}
+
 resource "google_container_cluster" "gke_cluster" {
   name                     = var.cluster_name
   location                 = var.region
@@ -27,6 +32,7 @@ resource "google_container_node_pool" "gke_nodes" {
     machine_type = "e2-standard-2"
     disk_size_gb = 100
     oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+    service_account = google_service_account.default.email
   }
   depends_on = [google_container_cluster.gke_cluster]
 }
