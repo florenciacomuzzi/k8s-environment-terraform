@@ -20,4 +20,5 @@ module "gke" {
   cluster_name                  = var.cluster_name
   cluster_secondary_range_name  = var.cluster_secondary_range_name
   services_secondary_range_name = var.services_secondary_range_name
+  depends_on = [module.vpc]
 }

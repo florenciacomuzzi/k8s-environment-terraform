@@ -7,7 +7,6 @@ resource "random_string" "identifier" {
   override_special = "123456789"
 }
 
-
 resource "google_service_account" "default" {
   account_id   = "k8s-sa-${random_string.identifier.result}"
   display_name = "Node pool service account"
