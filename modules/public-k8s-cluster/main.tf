@@ -43,6 +43,7 @@ resource "google_container_node_pool" "gke_nodes" {
   location   = var.region
   cluster    = var.cluster_name
   node_count = var.node_count
+  deletion_protection = false
 
   max_pods_per_node = var.max_pods_per_node
 
