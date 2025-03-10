@@ -47,3 +47,9 @@ variable "node_machine_type" {
   default     = "e2-standard-2"
   description = "The type of machine to create for each node"
 }
+
+variable "node_count" {
+  type        = number
+  default     = 3
+  description = "The number of nodes to create"
+}

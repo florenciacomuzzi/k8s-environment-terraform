@@ -42,7 +42,7 @@ resource "google_container_node_pool" "gke_nodes" {
   name       = "gke-node-pool"
   location   = var.region
   cluster    = var.cluster_name
-  node_count = 3
+  node_count = var.node_count
 
   node_config {
     machine_type    = var.node_machine_type
