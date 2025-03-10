@@ -38,7 +38,7 @@ variable "cluster_name" {
 
 variable "node_disk_size_gb" {
   type        = number
-  default     = "100"
+  default     = 10 # "100" requires quota increase
   description = "The size of the disk attached to each node, in GB"
 }
 
