@@ -27,6 +27,10 @@ Deployments are triggered from GitHub Actions workflows.
 like `454824995744-compute@developer.gserviceaccount.com`. Go to IAM & Admin > Service Accounts > 
 `{project-number}-compute@developer.gserviceaccount.com` > Permissions > Grant Access > {cicd service account email} > Role > ServiceAccountUser
   * You can find your project number by going to Cloud Console > Cloud overview > Dashboard.
+  * Increase the quota for 
+    * Persistent Disk SSD (GB) in us-east1 by going to Cloud Console > 
+IAM & Admin > Quotas. Find the quota for Persistent Disk SSD (GB) in us-east1 and Edit quota. Increase to 1000 GB.
+    * In-use regional external IPv4 addresses in us-east1 to 500
 
 ### GitHub
 * Clone this repository. Name it like "mysite-site-terraform".
