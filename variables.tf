@@ -57,3 +57,21 @@ variable "cluster_name" {
   description = "The name of the GKE cluster"
   type        = string
 }
+
+variable "node_disk_size_gb" {
+  type        = number
+  default     = "100"
+  description = "The size of the disk attached to each node, in GB"
+}
+
+variable "node_machine_type" {
+  type        = string
+  default     = "e2-standard-2"
+  description = "The type of machine to create for each node"
+}
+
+variable "node_count" {
+  type        = number
+  default     = 3
+  description = "The number of nodes to create"
+}

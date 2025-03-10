@@ -20,5 +20,8 @@ module "gke" {
   cluster_name                  = var.cluster_name
   cluster_secondary_range_name  = var.cluster_secondary_range_name
   services_secondary_range_name = var.services_secondary_range_name
+  node_machine_type             = var.node_machine_type
+  node_count                    = var.node_count
+  node_disk_size_gb             = var.node_disk_size_gb
   depends_on                    = [module.vpc]
 }
