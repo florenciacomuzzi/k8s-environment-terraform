@@ -12,7 +12,7 @@ module "vpc" {
 }
 
 module "gke" {
-  source                        = "modules/private-k8s-cluster"
+  source                        = "./modules/private-k8s-cluster"
   project_id                    = var.project_id
   region                        = var.region
   network_name                  = var.network_name
