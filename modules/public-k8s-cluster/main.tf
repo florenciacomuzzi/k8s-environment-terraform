@@ -25,6 +25,8 @@ resource "google_container_cluster" "gke_cluster" {
   network    = var.network_name
   subnetwork = var.subnet_name
 
+  deletion_protection = false
+
   ip_allocation_policy {
     cluster_secondary_range_name  = var.cluster_secondary_range_name
     services_secondary_range_name = var.services_secondary_range_name
@@ -43,7 +45,6 @@ resource "google_container_node_pool" "gke_nodes" {
   location   = var.region
   cluster    = var.cluster_name
   node_count = var.node_count
-  deletion_protection = false
 
   max_pods_per_node = var.max_pods_per_node
 
