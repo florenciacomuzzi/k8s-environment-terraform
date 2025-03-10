@@ -27,3 +27,7 @@ automatically create secondary range
 --> secondary ranges are managed for us
 
 public cluster --> secure with firewall
+
+
+gcloud container node-pools describe gke-node-pool --cluster=<your-cluster-name> --zone=<your-zone>
+
