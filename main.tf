@@ -23,5 +23,6 @@ module "gke" {
   node_machine_type             = var.node_machine_type
   node_count                    = var.node_count
   node_disk_size_gb             = var.node_disk_size_gb
+  max_pods_per_node             = var.max_pods_per_node
   depends_on                    = [module.vpc]
 }
