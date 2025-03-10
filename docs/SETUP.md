@@ -17,6 +17,8 @@ Deployments are triggered from GitHub Actions workflows.
   * Compute Security Admin
   * Create Service Accounts
   * Delete Service Accounts
+  * Service Account User
+  * Project IAM Admin
 * Enable the following APIs if not enabled. You will need [Owner](https://cloud.google.com/service-usage/docs/access-control#basic_roles) access to the project.
   * Compute Engine API
   * Kubernetes Engine API
