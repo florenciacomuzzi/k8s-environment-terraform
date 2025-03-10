@@ -44,12 +44,15 @@ resource "google_container_node_pool" "gke_nodes" {
   cluster    = var.cluster_name
   node_count = var.node_count
 
+  max_pods_per_node = 32
+
   node_config {
     machine_type    = var.node_machine_type
     disk_size_gb    = var.node_disk_size_gb
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.default.email
   }
+
   depends_on = [google_container_cluster.gke_cluster]
   lifecycle {
     ignore_changes = [node_config]
