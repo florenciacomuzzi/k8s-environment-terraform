@@ -1,8 +1,3 @@
-data "google_container_cluster" "exists" {
-  name     = var.cluster_name
-  location = var.region
-}
-
 resource "random_string" "identifier" {
   length           = 5
   special          = true
@@ -16,6 +11,13 @@ resource "google_service_account" "default" {
   account_id   = "k8s-sa-${random_string.identifier.result}"
   display_name = "Node pool service account"
 }
+
+resource "google_project_iam_member" "service_account_user" {
+  project = var.project_id
+  role    = "roles/iam.serviceAccountUser"
+  member  = "serviceAccount:k8s-sa-${random_string.identifier.result}@${var.project_id}.iam.gserviceaccount.com"
+}
+
 
 resource "google_container_cluster" "gke_cluster" {
   name       = var.cluster_name
