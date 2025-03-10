@@ -1,3 +1,8 @@
+data "google_container_cluster" "exists" {
+  name     = var.cluster_name
+  location = var.region
+}
+
 resource "random_string" "identifier" {
   length           = 5
   special          = true
@@ -44,4 +49,7 @@ resource "google_container_node_pool" "gke_nodes" {
     service_account = google_service_account.default.email
   }
   depends_on = [google_container_cluster.gke_cluster]
+  lifecycle {
+    ignore_changes = [node_config]
+  }
 }
