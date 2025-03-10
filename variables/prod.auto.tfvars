@@ -11,3 +11,4 @@ services_secondary_range_cidr = "192.168.8.0/22"
 node_disk_size_gb             = 50
 node_machine_type             = "e2-standard-2"
 node_count                    = 1
+max_pods_per_node             = 32

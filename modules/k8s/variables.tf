@@ -53,3 +53,9 @@ variable "node_count" {
   default     = 3
   description = "The number of nodes to create"
 }
+
+variable "max_pods_per_node" {
+  type        = number
+  default     = 32
+  description = "The maximum number of pods to schedule on each node"
+}
