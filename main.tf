@@ -23,7 +23,8 @@ module "gke" {
   node_machine_type             = var.node_machine_type
   node_count                    = var.node_count
   node_disk_size_gb             = var.node_disk_size_gb
-  max_pods_per_node             = var.max_pods_per_node
+  total_min_node_count          = var.total_min_node_count
+  total_max_node_count          = var.total_max_node_count
   master_authorized_cidr_blocks = var.master_authorized_cidr_blocks
   master_ipv4_cidr_block        = var.master_ipv4_cidr_block
   subnet_cidr                   = var.subnet_cidr

@@ -70,10 +70,16 @@ variable "node_count" {
   description = "The number of nodes to create"
 }
 
-variable "max_pods_per_node" {
+variable "total_min_node_count" {
   type        = number
-  default     = 32
-  description = "The maximum number of pods to schedule on each node"
+  default     = 1
+  description = "The minimum number of nodes to create"
+}
+
+variable "total_max_node_count" {
+  type        = number
+  default     = 3
+  description = "The maximum number of nodes to create"
 }
 
 variable "master_authorized_cidr_blocks" {

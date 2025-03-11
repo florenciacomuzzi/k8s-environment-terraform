@@ -11,7 +11,8 @@ services_secondary_range_cidr = "192.168.8.0/22"
 node_disk_size_gb             = 50
 node_machine_type             = "e2-standard-2"
 node_count                    = 1
-max_pods_per_node             = 32
+total_min_node_count          = 1
+total_max_node_count          = 3
 master_ipv4_cidr_block        = "10.13.0.0/28"
 master_authorized_cidr_blocks = [
   {

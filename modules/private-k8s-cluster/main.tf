@@ -60,7 +60,10 @@ resource "google_container_node_pool" "gke_nodes" {
   cluster    = var.cluster_name
   node_count = var.node_count
 
-  max_pods_per_node = var.max_pods_per_node
+  autoscaling {
+    total_min_node_count = var.total_min_node_count
+    total_max_node_count = var.total_max_node_count
+  }
 
   node_config {
     machine_type    = var.node_machine_type
