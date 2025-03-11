@@ -147,4 +147,4 @@ resource "google_container_cluster" "gke_cluster" {
 #   router     = google_compute_router.router.name
 #   name       = "nat-config"
 #
-}
+# }
