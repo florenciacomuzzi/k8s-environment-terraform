@@ -124,17 +124,17 @@ resource "google_compute_firewall" "rules" {
 ## Create IAP SSH permissions for your test instance
 
 resource "google_project_iam_member" "project" {
-  project = "tcb-project-371706"
+  project = var.project_id
   role    = "roles/iap.tunnelResourceAccessor"
-  member  = "serviceAccount:terraform-demo-aft@tcb-project-371706.iam.gserviceaccount.com"
+  member  = "serviceAccount:k8s-sa-${random_string.identifier.result}@${var.project_id}.iam.gserviceaccount.com" # TODO update
 }
 
 # create cloud router for nat gateway
 resource "google_compute_router" "router" {
-  project = "tcb-project-371706"
+  project = var.project_id
   name    = "nat-router"
-  network = "vpc1"
-  region  = "asia-south2"
+  network = var.network_name
+  region  = var.region
 }
 
 ## Create Nat Gateway with module
@@ -142,8 +142,8 @@ resource "google_compute_router" "router" {
 module "cloud-nat" {
   source     = "terraform-google-modules/cloud-nat/google"
   version    = "~> 1.2"
-  project_id = "tcb-project-371706"
-  region     = "asia-south2"
+  project_id = var.project_id
+  region     = var.region
   router     = google_compute_router.router.name
   name       = "nat-config"
 
