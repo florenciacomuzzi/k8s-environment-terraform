@@ -1,3 +1,12 @@
+# k8s-environment-terraform
+This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in 
+an environment. 
+
+* Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
+for instructions on setting up your own project.
+* For information on CICD, refer to the
+[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
