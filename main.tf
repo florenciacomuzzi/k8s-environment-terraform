@@ -26,5 +26,7 @@ module "gke" {
   max_pods_per_node             = var.max_pods_per_node
   master_authorized_cidr_blocks = var.master_authorized_cidr_blocks
   master_ipv4_cidr_block        = var.master_ipv4_cidr_block
+  subnet_cidr                   = var.subnet_cidr
+  cluster_secondary_range_cidr  = var.cluster_secondary_range_cidr
   depends_on                    = [module.vpc]
 }
