@@ -14,3 +14,13 @@ node_count                    = 1
 max_pods_per_node             = 32
 authorized_cidr_block         = "10.0.0.7/32"
 master_ipv4_cidr_block        = "10.13.0.0/28"
+master_authorized_cidr_blocks = [
+  {
+    cidr_block   = "10.0.0.7/32"
+    display_name = "Network 1"
+  },
+  {
+    cidr_block   = "192.168.1.0/24"
+    display_name = "Network 2"
+  }
+]

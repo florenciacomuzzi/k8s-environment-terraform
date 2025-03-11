@@ -81,8 +81,21 @@ variable "max_pods_per_node" {
   description = "The maximum number of pods to schedule on each node"
 }
 
-variable "authorized_cidr_block" {
-  type        = string
+variable "master_authorized_cidr_blocks" {
+  type = list(object({
+    cidr_block   = string
+    display_name = string
+  }))
+  default = [
+    {
+      cidr_block   = "10.0.0.7/32"
+      display_name = "Network 1"
+    },
+    {
+      cidr_block   = "192.168.1.0/24"
+      display_name = "Network 2"
+    }
+  ]
   description = "The CIDR block allowed to connect to the master node"
 }
 
