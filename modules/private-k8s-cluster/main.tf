@@ -25,6 +25,18 @@ resource "google_container_cluster" "gke_cluster" {
   network    = var.network_name
   subnetwork = var.subnet_name
 
+  cluster_autoscaling {
+    enabled = true
+    resource_limits {
+      maximum       = var.cluster_autoscaling_max_memory_gb
+      resource_type = "memory"
+    }
+    resource_limits {
+      maximum       = var.cluster_autoscaling_max_cpu
+      resource_type = "cpu"
+    }
+  }
+
   private_cluster_config {
     enable_private_endpoint = true
     enable_private_nodes    = true

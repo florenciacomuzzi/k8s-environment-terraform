@@ -23,3 +23,5 @@ master_authorized_cidr_blocks = [
     display_name = "Network 2"
   }
 ]
+cluster_autoscaling_max_memory_gb = 30
+cluster_autoscaling_max_cpu       = 16

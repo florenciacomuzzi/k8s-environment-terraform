@@ -99,3 +99,15 @@ variable "master_ipv4_cidr_block" {
   type        = string
   description = "The CIDR block for the master node"
 }
+
+variable "cluster_autoscaling_max_memory_gb" {
+  type        = string
+  default     = "32"
+  description = "The maximum memory for the cluster autoscaler and used across all node pools"
+}
+
+variable "cluster_autoscaling_max_cpu" {
+  type        = string
+  default     = "8"
+  description = "The maximum CPU for the cluster autoscaler and used across all node pools"
+}
