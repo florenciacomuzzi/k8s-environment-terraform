@@ -12,7 +12,6 @@ node_disk_size_gb             = 50
 node_machine_type             = "e2-standard-2"
 node_count                    = 1
 max_pods_per_node             = 32
-authorized_cidr_block         = "10.0.0.7/32"
 master_ipv4_cidr_block        = "10.13.0.0/28"
 master_authorized_cidr_blocks = [
   {
