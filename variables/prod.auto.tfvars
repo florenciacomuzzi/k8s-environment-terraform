@@ -10,7 +10,6 @@ services_secondary_range_name = "gke-services"
 services_secondary_range_cidr = "10.12.0.0/21"
 node_disk_size_gb             = 50
 node_machine_type             = "e2-standard-2"
-node_count                    = 1
 total_min_node_count          = 1
 total_max_node_count          = 3
 master_ipv4_cidr_block        = "10.13.0.0/28"

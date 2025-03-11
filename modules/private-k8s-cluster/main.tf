@@ -55,10 +55,9 @@ resource "google_container_cluster" "gke_cluster" {
 
 # Node pool for GKE Cluster
 resource "google_container_node_pool" "gke_nodes" {
-  name       = "gke-node-pool"
-  location   = var.region
-  cluster    = var.cluster_name
-  node_count = var.node_count
+  name     = "gke-node-pool"
+  location = var.region
+  cluster  = var.cluster_name
 
   autoscaling {
     total_min_node_count = var.total_min_node_count

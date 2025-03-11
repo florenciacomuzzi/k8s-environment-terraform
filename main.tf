@@ -21,7 +21,6 @@ module "gke" {
   cluster_secondary_range_name  = var.cluster_secondary_range_name
   services_secondary_range_name = var.services_secondary_range_name
   node_machine_type             = var.node_machine_type
-  node_count                    = var.node_count
   node_disk_size_gb             = var.node_disk_size_gb
   total_min_node_count          = var.total_min_node_count
   total_max_node_count          = var.total_max_node_count

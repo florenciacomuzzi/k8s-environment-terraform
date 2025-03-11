@@ -65,12 +65,6 @@ variable "node_machine_type" {
   description = "The type of machine to create for each node"
 }
 
-variable "node_count" {
-  type        = number
-  default     = 3
-  description = "The number of nodes to create"
-}
-
 variable "total_min_node_count" {
   type        = number
   default     = 1
