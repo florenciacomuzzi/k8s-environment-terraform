@@ -80,3 +80,13 @@ variable "max_pods_per_node" {
   type        = number
   description = "The maximum number of pods to schedule on each node"
 }
+
+variable "authorized_cidr_block" {
+  type        = string
+  description = "The CIDR block allowed to connect to the master node"
+}
+
+variable "master_ipv4_cidr_block" {
+  type        = string
+  description = "The CIDR block for the master node"
+}

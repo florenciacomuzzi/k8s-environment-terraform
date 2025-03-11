@@ -24,5 +24,7 @@ module "gke" {
   node_count                    = var.node_count
   node_disk_size_gb             = var.node_disk_size_gb
   max_pods_per_node             = var.max_pods_per_node
+  authorized_cidr_block         = var.authorized_cidr_block
+  master_ipv4_cidr_block        = var.master_ipv4_cidr_block
   depends_on                    = [module.vpc]
 }

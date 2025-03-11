@@ -27,13 +27,13 @@ resource "google_container_cluster" "gke_cluster" {
 
   private_cluster_config {
     enable_private_endpoint = true
-    enable_private_nodes   = true
-    master_ipv4_cidr_block = "10.13.0.0/28"
+    enable_private_nodes    = true
+    master_ipv4_cidr_block  = var.master_ipv4_cidr_block
   }
 
   master_authorized_networks_config {
     cidr_blocks {
-      cidr_block   = "10.0.0.7/32"
+      cidr_block   = var.authorized_cidr_block
       display_name = "net1"
     }
   }
