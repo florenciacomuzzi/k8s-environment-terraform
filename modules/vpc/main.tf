@@ -22,38 +22,3 @@ resource "google_compute_subnetwork" "gke_subnet" {
     ip_cidr_range = var.services_secondary_range_cidr
   }
 }
-
-# Firewall rules for GKE communication
-# resource "google_compute_firewall" "allow-internal" {
-#   name    = "gke-allow-internal"
-#   network = google_compute_network.vpc.name
-#
-#   allow {
-#     protocol = "tcp"
-#     ports    = ["0-65535"]
-#   }
-#
-#   allow {
-#     protocol = "udp"
-#     ports    = ["0-65535"]
-#   }
-#
-#   allow {
-#     protocol = "icmp"
-#   }
-#
-#   source_ranges = [var.subnet_cidr]
-# }
-
-# Firewall rule to allow health checks
-# resource "google_compute_firewall" "allow-health-checks" {
-#   name    = "gke-allow-health-checks"
-#   network = google_compute_network.vpc.name
-#
-#   allow {
-#     protocol = "tcp"
-#     ports    = ["10256", "15017"] # Common ports for health checks
-#   }
-#
-#   source_ranges = ["130.211.0.0/22", "35.191.0.0/16"] # Google Cloud health check IPs
-# }

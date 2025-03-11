@@ -74,3 +74,77 @@ resource "google_container_node_pool" "gke_nodes" {
     ignore_changes = [node_config]
   }
 }
+
+# Create jump host to access private k8s cluster
+
+resource "google_compute_address" "my_internal_ip_addr" {
+  project      = var.project_id
+  address_type = "INTERNAL"
+  region       = var.region
+  subnetwork   = var.subnet_name
+  name         = "my-ip"
+  address      = "10.0.0.7"
+  description  = "An internal IP address for jump host"
+}
+
+resource "google_compute_instance" "default" {
+  project      = var.project_id
+  zone         = var.region
+  name         = "jump-host"
+  machine_type = "e2-medium"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+    }
+  }
+  network_interface {
+    network    = var.network_name
+    subnetwork = var.subnet_name # Replace with a reference or self link to your subnet, in quotes
+    network_ip = google_compute_address.my_internal_ip_addr.address
+  }
+}
+
+
+## Creare Firewall to access jump hist via iap
+resource "google_compute_firewall" "rules" {
+  project = "tcb-project-371706"
+  name    = "allow-ssh"
+  network = "vpc1" # Replace with a reference or self link to your network, in quotes
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+  source_ranges = ["35.235.240.0/20"]
+}
+
+
+
+## Create IAP SSH permissions for your test instance
+
+resource "google_project_iam_member" "project" {
+  project = "tcb-project-371706"
+  role    = "roles/iap.tunnelResourceAccessor"
+  member  = "serviceAccount:terraform-demo-aft@tcb-project-371706.iam.gserviceaccount.com"
+}
+
+# create cloud router for nat gateway
+resource "google_compute_router" "router" {
+  project = "tcb-project-371706"
+  name    = "nat-router"
+  network = "vpc1"
+  region  = "asia-south2"
+}
+
+## Create Nat Gateway with module
+
+module "cloud-nat" {
+  source     = "terraform-google-modules/cloud-nat/google"
+  version    = "~> 1.2"
+  project_id = "tcb-project-371706"
+  region     = "asia-south2"
+  router     = google_compute_router.router.name
+  name       = "nat-config"
+
+}
