@@ -97,12 +97,6 @@ variable "cluster_autoscaling_max_cpu" {
   description = "The maximum CPU usage across all node pools to trigger the cluster autoscaler to provision more node pools"
 }
 
-variable "create_jump_host" {
-  type        = bool
-  default     = true
-  description = "Whether to create jump host"
-}
-
 variable "jump_host_ip_address" {
   type        = string
   default     = "0.0.0.0"

@@ -103,9 +103,3 @@ variable "jump_host_ip_address" {
   type        = string
   description = "The internal IP address of the jump host"
 }
-
-variable "create_jump_host" {
-  type        = bool
-  default     = true
-  description = "Whether to create jump host"
-}

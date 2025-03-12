@@ -27,4 +27,3 @@ node_pools = [
   }
 ]
 jump_host_ip_address = "10.0.0.7"
-create_jump_host     = true
