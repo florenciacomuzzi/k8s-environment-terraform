@@ -37,7 +37,9 @@ resource "google_container_cluster" "gke_cluster" {
     }
   }
 
-  vertical_pod_autoscaling = true
+  vertical_pod_autoscaling {
+    enabled = true
+  }
 
   private_cluster_config {
     enable_private_endpoint = true
