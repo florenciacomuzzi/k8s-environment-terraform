@@ -28,6 +28,5 @@ module "gke" {
   cluster_autoscaling_max_cpu       = var.cluster_autoscaling_max_cpu
   node_pools                        = var.node_pools
   jump_host_ip_address              = var.jump_host_ip_address
-  create_jump_host                  = var.create_jump_host
   depends_on                        = [module.vpc]
 }

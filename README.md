@@ -1,11 +1,34 @@
 # k8s-environment-terraform
 This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in 
-an environment. 
+an environment. This work is part of a take home assignment for a company during the interview process.
 
 * Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
 for instructions on setting up your own project.
 * For information on CICD, refer to the
 [CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
+
+---
+
+## Assumptions
+I have assumed the following:
+* A unique root module is expected i.e. can't use existing module like 
+[`terraform-google-kubernetes-engine/modules/private-cluster`](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v36.1.0/modules/beta-private-cluster).
+* Modules are opinionated.
+* Scale is unknown so sensibility of sample values is subjective.
+
+---
+
+## Testing
+These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set. 
+The `main` branch represents the production environment and is currently up.
+
+---
+
+## Networking
+The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
+services, pods, and load balancers. Additionally, the `private-k8s-cluster` module creates a jump host.
+
+---
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
