@@ -42,7 +42,7 @@ the master node can only be accessed from within the VPC.
 ---
 
 ## Autoscaling
-The following features are enabled by the module: 
+The following features are enabled by the gke module: 
 * The cluster autoscaler in GKE is responsible for automatically adjusting the number of nodes 
 in a node pool based on resource demands (like CPU and memory usage).
 * Node Autoprovisioning is a feature of GKE's cluster autoscaler but works at a higher level than 
