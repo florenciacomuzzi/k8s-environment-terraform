@@ -61,7 +61,7 @@ To ensure that the changes being proposed are appropriate for every environment,
 `terraform plan` are run for all environments subfolders. Before merging the pull request, you can 
 review the plans.
 
-### Store state in a Cloud Storage bucket
+### Storing state in a Cloud Storage bucket
 By default, Terraform stores state locally in a file named `terraform.tfstate`. This default 
 configuration can make Terraform usage difficult for teams, especially when many users run 
 Terraform at the same time and each machine has its own understanding of the current infrastructure.
@@ -74,6 +74,9 @@ To allow the CICD service account to run Terraform scripts with the goal of mana
 resources, you need to grant it appropriate access to your project. You will also need to grant 
 permissions to the service account.
 
+For information on CICD, refer to the
+[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
+documentation.
 
 ### Changing your environment configuration in a new feature branch
 By now, you have most of your environment configured. So it's time to make some code changes in your 
