@@ -26,7 +26,12 @@ The `main` branch represents the production environment and is currently up.
 
 ## Networking
 The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
-services, pods, and load balancers. Additionally, the `private-k8s-cluster` module creates a jump host.
+services, pods, and load balancers.
+
+---
+
+## Security
+The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node.
 
 ---
 
