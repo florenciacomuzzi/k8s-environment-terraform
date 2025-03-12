@@ -90,14 +90,13 @@ resource "google_container_node_pool" "gke_nodes" {
 }
 
 # Create jump host to access private k8s cluster
-
 resource "google_compute_address" "my_internal_ip_addr" {
   project      = var.project_id
   address_type = "INTERNAL"
   region       = var.region
   subnetwork   = var.subnet_name
   name         = "my-ip"
-  address      = "10.0.0.7"
+  address      = var.jump_host_ip_address
   description  = "An internal IP address for jump host"
 }
 
@@ -136,11 +135,10 @@ resource "google_compute_firewall" "rules" {
 
 
 ## Create IAP SSH permissions for your test instance
-
 resource "google_project_iam_member" "project" {
   project = var.project_id
   role    = "roles/iap.tunnelResourceAccessor"
-  member  = "serviceAccount:k8s-sa-${random_string.identifier.result}@${var.project_id}.iam.gserviceaccount.com" # TODO update
+  member  = "serviceAccount:k8s-sa-${random_string.identifier.result}@${var.project_id}.iam.gserviceaccount.com"
 }
 
 # create cloud router for nat gateway
@@ -151,8 +149,7 @@ resource "google_compute_router" "router" {
   region  = var.region
 }
 
-## Create Nat Gateway with module
-
+## Create Nat Gateway
 module "cloud-nat" {
   source     = "terraform-google-modules/cloud-nat/google"
   version    = "~> 1.2"

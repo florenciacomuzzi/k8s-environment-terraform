@@ -30,5 +30,6 @@ module "gke" {
   cluster_secondary_range_cidr      = var.cluster_secondary_range_cidr
   cluster_autoscaling_max_memory_gb = var.cluster_autoscaling_max_memory_gb
   cluster_autoscaling_max_cpu       = var.cluster_autoscaling_max_cpu
+  jump_host_ip_address              = var.jump_host_ip_address
   depends_on                        = [module.vpc]
 }

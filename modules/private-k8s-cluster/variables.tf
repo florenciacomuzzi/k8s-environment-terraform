@@ -110,3 +110,8 @@ variable "cluster_autoscaling_max_cpu" {
   default     = "8"
   description = "The maximum CPU for the cluster autoscaler and used across all node pools"
 }
+
+variable "jump_host_ip_address" {
+  type        = string
+  description = "The internal IP address of the jump host"
+}
