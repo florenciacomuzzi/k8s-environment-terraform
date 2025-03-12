@@ -39,7 +39,7 @@ the master node can only be accessed from within the VPC.
 ## CICD
 CICD runs in GitHub Actions. A unique service account is used by the pipeline to authenticate with 
 GCP. A service account credentials file is used however Workload Identity Federation is preferred 
-for authentication. This is a potential area of improvement for this project. 
+for authentication. This is a potential area for improvement. 
 
 The actual Terraform state is stored in a Cloud Storage bucket.
 
