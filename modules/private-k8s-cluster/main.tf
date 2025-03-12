@@ -132,13 +132,16 @@ resource "google_compute_firewall" "rules" {
   source_ranges = ["35.235.240.0/20"]
 }
 
-
+resource "google_service_account" "jump_host" {
+  account_id   = "jump-host-sa-${random_string.identifier.result}"
+  display_name = "Jump host service account"
+}
 
 ## Create IAP SSH permissions for your test instance
 resource "google_project_iam_member" "project" {
   project = var.project_id
   role    = "roles/iap.tunnelResourceAccessor"
-  member  = "serviceAccount:k8s-sa-${random_string.identifier.result}@${var.project_id}.iam.gserviceaccount.com"
+  member  = "serviceAccount:${google_service_account.jump_host.email}"
 }
 
 # create cloud router for nat gateway
