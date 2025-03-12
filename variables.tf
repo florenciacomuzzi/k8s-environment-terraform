@@ -53,6 +53,11 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "node_pool_name" {
+  type        = string
+  description = "The name of the cluster node pool"
+}
+
 variable "node_disk_size_gb" {
   type        = number
   default     = "100"
@@ -115,4 +120,10 @@ variable "cluster_autoscaling_max_cpu" {
 variable "jump_host_ip_address" {
   type        = string
   description = "The internal IP address of the jump host"
+}
+
+variable "create_jump_host" {
+  type        = bool
+  default     = true
+  description = "Whether to create jump host"
 }

@@ -20,6 +20,7 @@ module "gke" {
   cluster_name                      = var.cluster_name
   cluster_secondary_range_name      = var.cluster_secondary_range_name
   services_secondary_range_name     = var.services_secondary_range_name
+  node_pool_name                    = var.node_pool_name
   node_machine_type                 = var.node_machine_type
   node_disk_size_gb                 = var.node_disk_size_gb
   total_min_node_count              = var.total_min_node_count
@@ -31,5 +32,6 @@ module "gke" {
   cluster_autoscaling_max_memory_gb = var.cluster_autoscaling_max_memory_gb
   cluster_autoscaling_max_cpu       = var.cluster_autoscaling_max_cpu
   jump_host_ip_address              = var.jump_host_ip_address
+  create_jump_host                  = var.create_jump_host
   depends_on                        = [module.vpc]
 }

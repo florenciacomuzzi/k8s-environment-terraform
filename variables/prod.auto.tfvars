@@ -22,3 +22,5 @@ master_authorized_cidr_blocks = [
 cluster_autoscaling_max_memory_gb = 30
 cluster_autoscaling_max_cpu       = 16
 jump_host_ip_address              = "10.0.0.7"
+create_jump_host                  = true
+node_pool_name                    = "gke-node-pool"

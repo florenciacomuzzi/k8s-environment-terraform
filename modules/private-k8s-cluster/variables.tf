@@ -52,10 +52,15 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "node_pool_name" {
+  type        = string
+  description = "The name of the cluster node pool"
+}
+
 variable "node_disk_size_gb" {
   type        = number
-  default     = 10 # "100" requires quota increase
-  description = "The size of the disk attached to each node, in GB"
+  default     = 10
+  description = "The size of the disk attached to each node in GB"
 }
 
 variable "node_machine_type" {
@@ -67,13 +72,18 @@ variable "node_machine_type" {
 variable "total_min_node_count" {
   type        = number
   default     = 1
-  description = "The minimum number of nodes to create"
+  description = "The minimum number of nodes to create in a node pool"
 }
 
 variable "total_max_node_count" {
   type        = number
   default     = 3
-  description = "The maximum number of nodes to create"
+  description = "The maximum number of nodes to create in a node pool"
+
+  validation {
+    condition     = length(var.total_max_node_count) > 2
+    error_message = "The maximum number of nodes in a node pool must be more than 2"
+  }
 }
 
 variable "master_authorized_cidr_blocks" {
@@ -91,7 +101,7 @@ variable "master_authorized_cidr_blocks" {
       display_name = "Network 2"
     }
   ]
-  description = "The CIDR block allowed to connect to the master node"
+  description = "The CIDR blocks allowed to connect to the master node"
 }
 
 variable "master_ipv4_cidr_block" {
@@ -111,7 +121,14 @@ variable "cluster_autoscaling_max_cpu" {
   description = "The maximum CPU for the cluster autoscaler and used across all node pools"
 }
 
+variable "create_jump_host" {
+  type        = bool
+  default     = true
+  description = "Whether to create jump host"
+}
+
 variable "jump_host_ip_address" {
   type        = string
+  default     = "0.0.0.0"
   description = "The internal IP address of the jump host"
 }
