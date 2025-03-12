@@ -31,7 +31,12 @@ services, pods, and load balancers.
 ---
 
 ## Security
-The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node.
+* The GKE node pool service account is used by the nodes in the cluster to authenticate and interact 
+with GCP services. Workloads can impersonate a different service account using Workload Identity thus
+overriding the use of the node pool service account.
+* The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node as
+the master node can only be accessed from within the VPC.
+* A user authenticates with the jump host using Identity-Aware Proxy.
 
 ---
 
