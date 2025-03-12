@@ -7,6 +7,8 @@ The `main` branch represents the production environment and is currently up.
 * Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
 for instructions on setting up your own project.
 * For information on CICD, refer to the
+[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) documentation.
+* For information on how to contribute to your own project, refer to the
 [CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
 
 ---
@@ -41,10 +43,12 @@ CICD runs in GitHub Actions. A unique service account is used by the pipeline to
 GCP. A service account credentials file is used however Workload Identity Federation is preferred 
 for authentication. This is a potential area for improvement. 
 
-The actual Terraform state is stored in a Cloud Storage bucket.
+The actual Terraform state is stored in a Cloud Storage bucket. Terraform authenticates using the
+CICD service account however best practice is to use a separate, distinct service account with just
+enough permissions to manage GCP resources.
 
-For more information on CICD, refer to the
-[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
+For more information on setting up CICD, refer to the
+[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) documentation.
 
 ---
 

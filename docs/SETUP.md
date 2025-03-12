@@ -41,7 +41,7 @@ like `454824995744-compute@developer.gserviceaccount.com`. Go to IAM & Admin > S
 `{project-number}-compute@developer.gserviceaccount.com` > Permissions > Grant Access > {cicd service account email} > Role > ServiceAccountUser
   * You can find your project number by going to Cloud Console > Cloud overview > Dashboard.
 * Increase the quota for 
-  * Depending on the size of your clluster, you may need to increase the quota for  various 
+  * Depending on the size of your cluster, you may need to increase the quota for  various 
 resources. For example, you may need to increase the quota for Persistent Disk SSD (GB) in the 
 cluster region `us-east1`. Go to Cloud Console > IAM & Admin > Quotas. Find the quota for Persistent 
 Disk SSD (GB) in `us-east1` and Edit quota. Increase to some number of GB as appropriate.
@@ -49,6 +49,10 @@ Disk SSD (GB) in `us-east1` and Edit quota. Increase to some number of GB as app
 ### GitHub
 * Go to this repository in GitHub > Use this template > Create a new repository. Give the repository
 a name like `gke-private-cluster-terraform` depending on what you are going to create in the environments.
-* Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it GCP_CREDENTIALS and paste in the credentials JSON.
+* Add as a repository secret by going to Settings > Secrets and variables > Actions. Name it `GCP_CREDENTIALS` and paste in the credentials JSON.
 
 You should now be able to run the `terraform-apply` and `terraform-plan` workflows via CICD. `terraform-plan` runs on pull request events, and `terraform-apply` runs on push events to the `main` branch.
+
+---
+For information on how to contribute to your own project, refer to the
+[Software Development Lifecycle](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
