@@ -42,6 +42,7 @@ The code in this repository is structured as follows:
 * The `modules/` folder contains inline Terraform modules. These modules represent logical groupings 
 of related resources and are used to share code across different environments.
 * The `variables/` folder contains the values used for each environment.
+* The `backend/` folder contains the Cloud Storage backend settings for each environment.
 
 
 The `.github/workflows/terraform.yml` file is a CICD configuration file that contains instructions 
