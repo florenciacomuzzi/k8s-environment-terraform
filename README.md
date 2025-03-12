@@ -1,6 +1,8 @@
 # k8s-environment-terraform
 This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in 
 an environment. This work is part of a take home assignment for a company during the interview process.
+These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set. 
+The `main` branch represents the production environment and is currently up.
 
 * Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
 for instructions on setting up your own project.
@@ -18,15 +20,9 @@ I have assumed the following:
 
 ---
 
-## Testing
-These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set. 
-The `main` branch represents the production environment and is currently up.
-
----
-
 ## Networking
 The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
-services, pods, and load balancers.
+services, pods, and load balancers with each in its own subnet.
 
 ---
 
@@ -37,6 +33,18 @@ overriding the use of the node pool service account.
 * The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node as
 the master node can only be accessed from within the VPC.
 * A user authenticates with the jump host using Identity-Aware Proxy.
+
+---
+
+## CICD
+CICD runs in GitHub Actions. A unique service account is used by the pipeline to authenticate with 
+GCP. A service account credentials file is used however Workload Identity Federation is preferred 
+for authentication. This is a potential area of improvement for this project. 
+
+The actual Terraform state is stored in a Cloud Storage bucket.
+
+For more information on CICD, refer to the
+[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
 
 ---
 
