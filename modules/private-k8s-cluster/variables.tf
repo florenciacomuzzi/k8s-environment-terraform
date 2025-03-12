@@ -52,38 +52,24 @@ variable "cluster_name" {
   type        = string
 }
 
-variable "node_pool_name" {
-  type        = string
-  description = "The name of the cluster node pool"
-}
-
-variable "node_disk_size_gb" {
-  type        = number
-  default     = 10
-  description = "The size of the disk attached to each node in GB"
-}
-
-variable "node_machine_type" {
-  type        = string
-  default     = "e2-standard-2"
-  description = "The type of machine to create for each node"
-}
-
-variable "total_min_node_count" {
-  type        = number
-  default     = 1
-  description = "The minimum number of nodes to create in a node pool"
-}
-
-variable "total_max_node_count" {
-  type        = number
-  default     = 3
-  description = "The maximum number of nodes to create in a node pool"
-
-  validation {
-    condition     = length(var.total_max_node_count) > 2
-    error_message = "The maximum number of nodes in a node pool must be more than 2"
-  }
+variable "node_pools" {
+  type = list(object({
+    name                 = string
+    node_disk_size_gb    = string
+    node_machine_type    = string
+    total_min_node_count = number
+    total_max_node_count = number
+  }))
+  default = [
+    {
+      name                 = "gke-node-pool"
+      node_disk_size_gb    = 10
+      node_machine_type    = "e2-standard-2"
+      total_min_node_count = 1
+      total_max_node_count = 3
+    }
+  ]
+  description = "The node pools to create"
 }
 
 variable "master_authorized_cidr_blocks" {
@@ -91,16 +77,6 @@ variable "master_authorized_cidr_blocks" {
     cidr_block   = string
     display_name = string
   }))
-  default = [
-    {
-      cidr_block   = "10.0.0.7/32"
-      display_name = "Network 1"
-    },
-    {
-      cidr_block   = "192.168.1.0/24"
-      display_name = "Network 2"
-    }
-  ]
   description = "The CIDR blocks allowed to connect to the master node"
 }
 
@@ -112,13 +88,13 @@ variable "master_ipv4_cidr_block" {
 variable "cluster_autoscaling_max_memory_gb" {
   type        = string
   default     = "32"
-  description = "The maximum memory for the cluster autoscaler and used across all node pools"
+  description = "The maximum memory usage across all node pools to trigger the cluster autoscaler to provision more node pools"
 }
 
 variable "cluster_autoscaling_max_cpu" {
   type        = string
   default     = "8"
-  description = "The maximum CPU for the cluster autoscaler and used across all node pools"
+  description = "The maximum CPU usage across all node pools to trigger the cluster autoscaler to provision more node pools"
 }
 
 variable "create_jump_host" {

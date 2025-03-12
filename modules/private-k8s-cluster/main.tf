@@ -71,18 +71,20 @@ resource "google_container_cluster" "gke_cluster" {
 
 # Node pool for GKE Cluster
 resource "google_container_node_pool" "gke_nodes" {
-  name     = var.node_pool_name
+  for_each = { for idx, pool in var.node_pools : pool.name => pool }
+
+  name     = each.value["name"]
   location = var.region
   cluster  = var.cluster_name
 
   autoscaling {
-    total_min_node_count = var.total_min_node_count
-    total_max_node_count = var.total_max_node_count
+    total_min_node_count = each.value["total_min_node_count"]
+    total_max_node_count = each.value["total_max_node_count"]
   }
 
   node_config {
-    machine_type    = var.node_machine_type
-    disk_size_gb    = var.node_disk_size_gb
+    machine_type    = each.value["node_machine_type"]
+    disk_size_gb    = each.value["node_disk_size_gb"]
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.default.email
   }
