@@ -1,7 +1,0 @@
-# TODO
-- use Workload Identity Federation in CICD
-- consider breaking up pull request and push workflows
-- use separate CICD service accounts for each environment
-- use service account impersonation when running Terraform
-- Add RBAC
-- set up Workload Identity on nodes to access Secret Manager

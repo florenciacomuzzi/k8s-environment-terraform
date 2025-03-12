@@ -1,15 +1,17 @@
 # k8s-environment-terraform
+
 This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in 
 an environment. This work is part of a take home assignment for a company during the interview process.
 These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set. 
-The `main` branch represents the production environment and is currently up.
+The `main` branch represents the production environment and is currently up. This repository works 
+as a template and can be cloned.
 
 * Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
 for instructions on setting up your own project.
 * For information on CICD, refer to the
 [CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) documentation.
 * For information on how to contribute to your own project, refer to the
-[CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
+[SDLC](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SDLC.md) documentation.
 
 ---
 
@@ -24,7 +26,8 @@ I have assumed the following:
 
 ## Networking
 The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
-services, pods, and load balancers with each in its own subnet.
+services, pods, and load balancers with each in its own subnet. The module creates a private cluster 
+so the cluster's master node is only accessible within the VPC.
 
 ---
 
@@ -38,14 +41,28 @@ the master node can only be accessed from within the VPC.
 
 ---
 
+## Autoscaling
+The following features are enabled by the module: 
+* The cluster autoscaler in GKE is responsible for automatically adjusting the number of nodes 
+in a node pool based on resource demands (like CPU and memory usage).
+* Node Autoprovisioning is a feature of GKE's cluster autoscaler but works at a higher level than 
+individual node pools. It allows the GKE cluster to dynamically create new node pools when the 
+existing node pools cannot meet the resource needs of the workloads.
+* Vertical Pod Autoscaling (VPA) is a feature that automatically 
+adjusts the resource requests (CPU and memory) for individual Pods based on their actual usage over 
+time. This helps ensure that each Pod has enough resources to operate efficiently without 
+over-provisioning or under-provisioning resources.
+
+---
+
 ## CICD
 CICD runs in GitHub Actions. A unique service account is used by the pipeline to authenticate with 
 GCP. A service account credentials file is used however Workload Identity Federation is preferred 
 for authentication. This is a potential area for improvement. 
 
 The actual Terraform state is stored in a Cloud Storage bucket. Terraform authenticates using the
-CICD service account however best practice is to use a separate, distinct service account with just
-enough permissions to manage GCP resources.
+CICD service account however best practice is for Terraform to impersonate a separate, distinct 
+service account used by Terraform with just enough permissions to manage GCP resources.
 
 For more information on setting up CICD, refer to the
 [CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) documentation.
