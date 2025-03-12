@@ -41,6 +41,8 @@ The code in this repository is structured as follows:
 
 * The `modules/` folder contains inline Terraform modules. These modules represent logical groupings 
 of related resources and are used to share code across different environments.
+* The `variables/` folder contains the values used for each environment.
+
 
 The `.github/workflows/terraform.yml` file is a CICD configuration file that contains instructions 
 for GitHub Actions, such as how to perform tasks based on a set of steps. This file specifies a 
