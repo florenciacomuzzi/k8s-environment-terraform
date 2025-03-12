@@ -97,7 +97,7 @@ resource "google_container_node_pool" "gke_nodes" {
 
 # Create jump host to access private k8s cluster
 resource "google_compute_address" "my_internal_ip_addr" {
-  count        = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   project      = var.project_id
   address_type = "INTERNAL"
   region       = var.region
@@ -108,7 +108,7 @@ resource "google_compute_address" "my_internal_ip_addr" {
 }
 
 resource "google_compute_instance" "default" {
-  count        = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   project      = var.project_id
   zone         = "${var.region}-b"
   name         = "jump-host"
@@ -129,7 +129,7 @@ resource "google_compute_instance" "default" {
 
 ## Create Firewall to access jump host via iap
 resource "google_compute_firewall" "rules" {
-  count   = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   project = var.project_id
   name    = "allow-ssh"
   network = var.network_name
@@ -143,14 +143,14 @@ resource "google_compute_firewall" "rules" {
 }
 
 resource "google_service_account" "jump_host" {
-  count        = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   account_id   = "jump-host-sa-${random_string.identifier.result}"
   display_name = "Jump host service account"
 }
 
 ## Create IAP SSH permissions for your test instance
 resource "google_project_iam_member" "project" {
-  count   = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   project = var.project_id
   role    = "roles/iap.tunnelResourceAccessor"
   member  = "serviceAccount:${google_service_account.jump_host.email}"
@@ -158,7 +158,7 @@ resource "google_project_iam_member" "project" {
 
 # create cloud router for nat gateway
 resource "google_compute_router" "router" {
-  count   = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   project = var.project_id
   name    = "nat-router"
   network = var.network_name
@@ -167,7 +167,7 @@ resource "google_compute_router" "router" {
 
 ## Create Nat Gateway
 module "cloud-nat" {
-  count      = var.create_jump_host ? 1 : 0
+  for_each = var.create_jump_host ? {test=1} : {}
   source     = "terraform-google-modules/cloud-nat/google"
   version    = "~> 1.2"
   project_id = var.project_id
