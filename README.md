@@ -17,7 +17,7 @@ for instructions on setting up your own project.
 
 ## Assumptions
 I have assumed the following:
-* A unique root module is expected i.e. can't use existing module like 
+* Unique modules are expected i.e. can't use existing module like 
 [`terraform-google-kubernetes-engine/modules/private-cluster`](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v36.1.0/modules/beta-private-cluster).
 * Modules are opinionated.
 * Scale is unknown so sensibility of sample values is subjective.
