@@ -27,7 +27,8 @@ I have assumed the following:
 ## Networking
 The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
 services, pods, and load balancers with each in its own subnet. The module creates a private cluster 
-so the cluster's master node is only accessible within the VPC.
+so the cluster's master node is only accessible within the VPC. A Default Deny VPC is an area for 
+improvement.
 
 ---
 
@@ -38,6 +39,8 @@ overriding the use of the node pool service account.
 * The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node as
 the master node can only be accessed from within the VPC.
 * A user authenticates with the jump host using Identity-Aware Proxy.
+* By default, GKE deploys the ip-masq-agent with a configuration that selectively masquerades 
+traffic—rewriting pod IPs for destinations that fall outside specified CIDRs. 
 
 ---
 
