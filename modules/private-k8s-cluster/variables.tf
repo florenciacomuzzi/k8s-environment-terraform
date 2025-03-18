@@ -97,8 +97,20 @@ variable "cluster_autoscaling_max_cpu" {
   description = "The maximum CPU usage across all node pools to trigger the cluster autoscaler to provision more node pools"
 }
 
+variable "jump_host_ip_address_name" {
+  type        = string
+  default     = "jump-host-ip"
+  description = "Name of the IP address resource"
+}
+
 variable "jump_host_ip_address" {
   type        = string
   default     = "0.0.0.0"
   description = "The internal IP address of the jump host"
+}
+
+variable "jump_host_name" {
+  type        = string
+  default     = "jump-host"
+  description = "The name of the jump host VM"
 }

@@ -99,7 +99,19 @@ variable "node_pools" {
   description = "The node pools to create"
 }
 
+variable "jump_host_ip_address_name" {
+  type        = string
+  default     = "jump-host-ip"
+  description = "Name of the IP address resource"
+}
+
 variable "jump_host_ip_address" {
   type        = string
   description = "The internal IP address of the jump host"
+}
+
+variable "jump_host_name" {
+  type        = string
+  default     = "jump-host"
+  description = "The name of the jump host VM"
 }

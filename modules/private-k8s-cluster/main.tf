@@ -101,7 +101,7 @@ resource "google_compute_address" "my_internal_ip_addr" {
   address_type = "INTERNAL"
   region       = var.region
   subnetwork   = var.subnet_name
-  name         = "my-ip"
+  name         = var.jump_host_ip_address_name
   address      = var.jump_host_ip_address
   description  = "An internal IP address for jump host"
 }
@@ -109,8 +109,8 @@ resource "google_compute_address" "my_internal_ip_addr" {
 resource "google_compute_instance" "default" {
   project      = var.project_id
   zone         = "${var.region}-b"
-  name         = "jump-host"
-  machine_type = "e2-medium"
+  name         = var.jump_host_name
+  machine_type = "custom-1-15360-ext"
 
   boot_disk {
     initialize_params {
