@@ -110,7 +110,7 @@ resource "google_compute_instance" "default" {
   project      = var.project_id
   zone         = "${var.region}-b"
   name         = var.jump_host_name
-  machine_type = "custom-1-15360-ext"
+  machine_type = "custom-2-15360-ext"
 
   allow_stopping_for_update = true
 
