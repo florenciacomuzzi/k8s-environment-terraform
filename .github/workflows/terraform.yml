@@ -149,3 +149,15 @@ jobs:
              echo "unsupported environment";
             fi
             terraform apply -var-file=variables/$ENV.auto.tfvars -auto-approve -lock=false
+ otel-cicd-action:
+   if: always()
+   name: OpenTelemetry Export Trace
+   runs-on: ubuntu-latest
+   needs: [terraform] # must run when all jobs are completed
+   steps:
+     - name: Export workflow
+       uses: corentinmusard/otel-cicd-action@v2
+       with:
+        otlpEndpoint: grpc://api.honeycomb.io:443/
+        otlpHeaders: ${{ secrets.OTLP_HEADERS }}
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
