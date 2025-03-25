@@ -165,6 +165,10 @@ resource "google_compute_instance" "default" {
     subnetwork = var.subnet_name # Replace with a reference or self link to your subnet, in quotes
     network_ip = google_compute_address.my_internal_ip_addr.address
   }
+
+  metadata = {
+    block-project-ssh-keys = "true"
+  }
 }
 
 
