@@ -108,7 +108,7 @@ resource "google_container_node_pool" "gke_nodes" {
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.default.email
     workload_metadata_config {
-      mode = "GKE_METADATA_SERVER"
+      mode = "GKE_METADATA"
     }
     labels = {
       "env" = "test"
