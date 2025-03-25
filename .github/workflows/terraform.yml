@@ -96,6 +96,15 @@ jobs:
      - name: Run TFLint
        run: tflint -f compact --recursive
 
+     - name: Run Terrascan
+       id: terrascan
+       uses: tenable/terrascan-action@main
+       with:
+         iac_type: 'terraform'
+         iac_version: 'v14'
+         policy_type: 'google'
+         only_warn: true
+
      - name: Terraform plan [pull_request]
        id: plan-pr
        if: github.event_name == 'pull_request'
