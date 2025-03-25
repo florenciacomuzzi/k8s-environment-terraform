@@ -12,7 +12,8 @@ resource "google_compute_subnetwork" "gke_subnet" {
   ip_cidr_range = var.subnet_cidr
   region        = var.region
 
-  enable_flow_logs = true
+  enable_flow_logs         = true
+  private_ip_google_access = true
 
   secondary_ip_range {
     range_name    = var.cluster_secondary_range_name
