@@ -87,6 +87,9 @@ resource "google_container_node_pool" "gke_nodes" {
     disk_size_gb    = each.value["node_disk_size_gb"]
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
     service_account = google_service_account.default.email
+    workload_metadata_config {
+      mode = "GKE_METADATA_SERVER"
+    }
   }
 
   depends_on = [google_container_cluster.gke_cluster]
