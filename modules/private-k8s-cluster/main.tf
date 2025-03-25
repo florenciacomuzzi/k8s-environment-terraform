@@ -29,6 +29,10 @@ resource "google_container_cluster" "gke_cluster" {
     channel = "RAPID"
   }
 
+  network_policy {
+    enabled = true
+  }
+
   enable_intranode_visibility = true
 
   cluster_autoscaling {
