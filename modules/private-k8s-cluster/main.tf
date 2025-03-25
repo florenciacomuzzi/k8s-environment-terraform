@@ -29,9 +29,9 @@ resource "google_container_cluster" "gke_cluster" {
     channel = "RAPID"
   }
 
-  network_policy {
-    enabled = true
-  }
+  # network_policy {
+  #   enabled = true
+  # }
 
   enable_intranode_visibility = true
 
@@ -146,8 +146,8 @@ resource "google_compute_instance" "default" {
   allow_stopping_for_update = true
 
   shielded_instance_config {
-    enable_secure_boot = true
-    enable_vtpm       = true
+    enable_secure_boot          = true
+    enable_vtpm                 = true
     enable_integrity_monitoring = true
   }
 
