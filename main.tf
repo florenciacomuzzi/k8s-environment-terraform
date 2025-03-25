@@ -21,7 +21,6 @@ module "gke" {
   services_secondary_range_name     = var.services_secondary_range_name
   master_authorized_cidr_blocks     = var.master_authorized_cidr_blocks
   master_ipv4_cidr_block            = var.master_ipv4_cidr_block
-  subnet_cidr                       = var.subnet_cidr
   cluster_autoscaling_max_memory_gb = var.cluster_autoscaling_max_memory_gb
   cluster_autoscaling_max_cpu       = var.cluster_autoscaling_max_cpu
   node_pools                        = var.node_pools

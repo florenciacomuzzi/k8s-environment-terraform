@@ -19,11 +19,6 @@ variable "subnet_name" {
   type        = string
 }
 
-variable "subnet_cidr" {
-  description = "The CIDR block for the subnet"
-  type        = string
-}
-
 variable "cluster_secondary_range_name" {
   type        = string
   default     = "gke-pods"
