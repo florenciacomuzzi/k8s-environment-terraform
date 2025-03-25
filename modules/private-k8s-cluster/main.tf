@@ -33,6 +33,10 @@ resource "google_container_cluster" "gke_cluster" {
   #   enabled = true
   # }
 
+  resource_labels = {
+    "project" = "crossing-the-narrow-bridge"
+  }
+
   enable_intranode_visibility = true
 
   cluster_autoscaling {
