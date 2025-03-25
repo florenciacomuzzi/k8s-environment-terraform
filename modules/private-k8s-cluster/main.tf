@@ -198,10 +198,12 @@ resource "google_compute_router" "router" {
   region  = var.region
 }
 
-## Create Nat Gateway
+# NOTE: It is recommended to use the Cloud Router module instead of this module.
+# The Cloud Router module is more flexible and can be used to manage resources in
+# addition to NATs such as interconnects.
 module "cloud-nat" {
   source     = "terraform-google-modules/cloud-nat/google"
-  version    = "~> 1.2"
+  version    = "~> 5.3.0"
   project_id = var.project_id
   region     = var.region
   router     = google_compute_router.router.name
