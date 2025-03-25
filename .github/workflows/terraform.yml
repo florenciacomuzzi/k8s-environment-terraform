@@ -13,13 +13,54 @@ env:
  TF_LOG: INFO
 
 jobs:
+ generate-sbom:
+   runs-on: ubuntu-latest
+   name: "Trivy"
+   permissions:
+     contents: write       # Required for modifying files
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: Run Trivy in GitHub SBOM mode and submit results to Dependency Graph
+       uses: aquasecurity/trivy-action@0.28.0
+       with:
+         scan-type: 'fs'
+         format: 'github'
+         output: 'dependency-results.sbom.json'
+         image-ref: '.'
+         github-pat: ${{ secrets.GITHUB_TOKEN }}
+
+ terrascan:
+   runs-on: ubuntu-latest
+   name: "Terrascan"
+   permissions:
+     contents: write       # Required for modifying files
+     security-events: write # Required to upload sarif
+   steps:
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: Run Terrascan
+       id: terrascan
+       uses: tenable/terrascan-action@main
+       with:
+         iac_type: 'terraform'
+         iac_version: 'v14'
+         only_warn: true
+         sarif_upload: true
+
+     - name: Upload SARIF file
+       uses: github/codeql-action/upload-sarif@v3
+       with:
+         sarif_file: terrascan.sarif
+
  terraform:
    name: "Terraform CICD"
    runs-on: ubuntu-latest
    permissions:
      pull-requests: write  # Required for creating or updating PRs
-     contents: write       # Required for modifying files (if applicable)
-     security-events: write # Required to upload sarif
+     contents: write       # Required for modifying files
    defaults:
      run:
        shell: bash
@@ -96,20 +137,6 @@ jobs:
 
      - name: Run TFLint
        run: tflint -f compact --recursive --minimum-failure-severity=error
-
-     - name: Run Terrascan
-       id: terrascan
-       uses: tenable/terrascan-action@main
-       with:
-         iac_type: 'terraform'
-         iac_version: 'v14'
-         only_warn: true
-         sarif_upload: true
-
-     - name: Upload SARIF file
-       uses: github/codeql-action/upload-sarif@v3
-       with:
-         sarif_file: terrascan.sarif
 
      - name: Terraform plan [pull_request]
        id: plan-pr
