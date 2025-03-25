@@ -25,6 +25,10 @@ resource "google_container_cluster" "gke_cluster" {
   network    = var.network_name
   subnetwork = var.subnet_name
 
+  release_channel {
+    channel = "RAPID"
+  }
+
   cluster_autoscaling {
     enabled = true
     resource_limits {
