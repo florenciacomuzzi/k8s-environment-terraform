@@ -5,7 +5,9 @@ cluster_name                  = "florenciacomuzzi-cluster-prod"
 subnet_cidr                   = "10.0.0.0/24"
 subnet_name                   = "my-subnet"
 cluster_secondary_range_name  = "gke-pods"
+cluster_secondary_range_cidr  = "10.11.0.0/21"
 services_secondary_range_name = "gke-services"
+services_secondary_range_cidr = "10.12.0.0/21"
 master_ipv4_cidr_block        = "10.13.0.0/28"
 master_authorized_cidr_blocks = [
   {

@@ -5,8 +5,8 @@ module "vpc" {
   subnet_cidr                   = var.subnet_cidr
   subnet_name                   = var.subnet_name
   cluster_secondary_range_name  = var.cluster_secondary_range_name
-  cluster_secondary_range_cidr  = var.cluster_secondary_range_cidr
   services_secondary_range_name = var.services_secondary_range_name
+  cluster_secondary_range_cidr  = var.cluster_secondary_range_cidr
   services_secondary_range_cidr = var.services_secondary_range_cidr
 }
 
