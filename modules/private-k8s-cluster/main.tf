@@ -69,6 +69,10 @@ resource "google_container_cluster" "gke_cluster" {
     }
   }
 
+  binary_authorization {
+    evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
+  }
+
   ip_allocation_policy {
     cluster_secondary_range_name  = var.cluster_secondary_range_name
     services_secondary_range_name = var.services_secondary_range_name
