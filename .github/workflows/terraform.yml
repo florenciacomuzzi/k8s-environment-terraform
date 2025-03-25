@@ -19,6 +19,7 @@ jobs:
    permissions:
      pull-requests: write  # Required for creating or updating PRs
      contents: write       # Required for modifying files (if applicable)
+     security-events: write # Required to upload sarif
    defaults:
      run:
        shell: bash
