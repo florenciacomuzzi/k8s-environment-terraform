@@ -8,8 +8,7 @@ on:
    - develop
  pull_request:
 
-permissions:
-   contents: read-all
+permissions: read-all
 
 env:
  # verbosity setting for Terraform logs
