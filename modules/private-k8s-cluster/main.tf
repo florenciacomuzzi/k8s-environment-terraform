@@ -29,6 +29,8 @@ resource "google_container_cluster" "gke_cluster" {
     channel = "RAPID"
   }
 
+  enable_intranode_visibility = true
+
   cluster_autoscaling {
     enabled = true
     resource_limits {
@@ -58,6 +60,12 @@ resource "google_container_cluster" "gke_cluster" {
         cidr_block   = cidr_blocks.value.cidr_block
         display_name = cidr_blocks.value.display_name
       }
+    }
+  }
+
+  master_auth {
+    client_certificate_config {
+      issue_client_certificate = false
     }
   }
 
@@ -93,6 +101,9 @@ resource "google_container_node_pool" "gke_nodes" {
     service_account = google_service_account.default.email
     workload_metadata_config {
       mode = "GKE_METADATA_SERVER"
+    }
+    labels = {
+      "env" = "test"
     }
   }
 
