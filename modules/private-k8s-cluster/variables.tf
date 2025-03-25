@@ -36,16 +36,16 @@ variable "services_secondary_range_name" {
   description = "The name of the secondary range to use for services"
 }
 
-variable "cluster_secondary_range_cidr" {
-  type        = string
-  description = "The secondary range to use for pods"
-}
-
-variable "services_secondary_range_cidr" {
-  type        = string
-  default     = "10.30.0.0/16"
-  description = "The secondary range to use for services"
-}
+# variable "cluster_secondary_range_cidr" {
+#   type        = string
+#   description = "The secondary range to use for pods"
+# }
+#
+# variable "services_secondary_range_cidr" {
+#   type        = string
+#   default     = "10.30.0.0/16"
+#   description = "The secondary range to use for services"
+# }
 
 variable "cluster_name" {
   description = "The name of the GKE cluster"
