@@ -97,6 +97,11 @@ resource "google_container_node_pool" "gke_nodes" {
   location = var.region
   cluster  = var.cluster_name
 
+  management {
+    auto_upgrade = true
+    auto_repair  = true
+  }
+
   autoscaling {
     total_min_node_count = each.value["total_min_node_count"]
     total_max_node_count = each.value["total_max_node_count"]
