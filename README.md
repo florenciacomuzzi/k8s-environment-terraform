@@ -1,12 +1,12 @@
 # k8s-environment-terraform
 
-This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in 
+This repository contains Terraform code to create a VPC and various types of Kubernetes clusters in
 an environment. This work is part of a take home assignment for a company during the interview process.
-These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set. 
-The `main` branch represents the production environment and is currently up. This repository works 
+These modules were _tested_ in a GCP project created for this assignment. A budget of $100 was set.
+The `main` branch represents the production environment and is currently up. This repository works
 as a template and can be cloned.
 
-* Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) 
+* Refer to the [SETUP](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md)
 for instructions on setting up your own project.
 * For information on CICD, refer to the
 [CICD](https://github.com/florenciacomuzzi/k8s-environment-terraform/blob/main/docs/SETUP.md) documentation.
@@ -17,7 +17,7 @@ for instructions on setting up your own project.
 
 ## Assumptions
 I have assumed the following:
-* Unique modules are expected i.e. can't use existing module like 
+* Unique modules are expected i.e. can't use existing module like
 [`terraform-google-kubernetes-engine/modules/private-cluster`](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v36.1.0/modules/beta-private-cluster).
 * Modules are opinionated.
 * Scale is unknown so sensibility of sample values is subjective.
@@ -25,46 +25,46 @@ I have assumed the following:
 ---
 
 ## Networking
-The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for 
-services, pods, and load balancers with each in its own subnet. The module creates a private cluster 
-so the cluster's master node is only accessible within the VPC. A Default Deny VPC is an area for 
+The network setup is unknown. In a real scenario, there is careful planning of IP address ranges for
+services, pods, and load balancers with each in its own subnet. The module creates a private cluster
+so the cluster's master node is only accessible within the VPC. A Default Deny VPC is an area for
 improvement.
 
 ---
 
 ## Security
-* The GKE node pool service account is used by the nodes in the cluster to authenticate and interact 
+* The GKE node pool service account is used by the nodes in the cluster to authenticate and interact
 with GCP services. Workloads can impersonate a different service account using Workload Identity thus
 overriding the use of the node pool service account.
 * The `private-k8s-cluster` module creates a jump host to connect to the cluster's master node as
 the master node can only be accessed from within the VPC.
 * A user authenticates with the jump host using Identity-Aware Proxy.
-* By default, GKE deploys the ip-masq-agent with a configuration that selectively masquerades 
-traffic—rewriting pod IPs for destinations that fall outside specified CIDRs. 
+* By default, GKE deploys the ip-masq-agent with a configuration that selectively masquerades
+traffic—rewriting pod IPs for destinations that fall outside specified CIDRs.
 
 ---
 
 ## Autoscaling
-The following features are enabled by the gke module: 
-* The cluster autoscaler in GKE is responsible for automatically adjusting the number of nodes 
+The following features are enabled by the gke module:
+* The cluster autoscaler in GKE is responsible for automatically adjusting the number of nodes
 in a node pool based on resource demands (like CPU and memory usage).
-* Node Autoprovisioning is a feature of GKE's cluster autoscaler but works at a higher level than 
-individual node pools. It allows the GKE cluster to dynamically create new node pools when the 
+* Node Autoprovisioning is a feature of GKE's cluster autoscaler but works at a higher level than
+individual node pools. It allows the GKE cluster to dynamically create new node pools when the
 existing node pools cannot meet the resource needs of the workloads.
-* Vertical Pod Autoscaling (VPA) is a feature that automatically 
-adjusts the resource requests (CPU and memory) for individual Pods based on their actual usage over 
-time. This helps ensure that each Pod has enough resources to operate efficiently without 
+* Vertical Pod Autoscaling (VPA) is a feature that automatically
+adjusts the resource requests (CPU and memory) for individual Pods based on their actual usage over
+time. This helps ensure that each Pod has enough resources to operate efficiently without
 over-provisioning or under-provisioning resources.
 
 ---
 
 ## CICD
-CICD runs in GitHub Actions. A unique service account is used by the pipeline to authenticate with 
-GCP. A service account credentials file is used however Workload Identity Federation is preferred 
-for authentication. This is a potential area for improvement. 
+CICD runs in GitHub Actions. A unique service account is used by the pipeline to authenticate with
+GCP. A service account credentials file is used however Workload Identity Federation is preferred
+for authentication. This is a potential area for improvement.
 
 The actual Terraform state is stored in a Cloud Storage bucket. Terraform authenticates using the
-CICD service account however best practice is for Terraform to impersonate a separate, distinct 
+CICD service account however best practice is for Terraform to impersonate a separate, distinct
 service account used by Terraform with just enough permissions to manage GCP resources.
 
 For more information on setting up CICD, refer to the
@@ -79,7 +79,7 @@ For more information on setting up CICD, refer to the
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | 6.24.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | 6.27.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.7.1 |
 
 ## Providers
@@ -106,7 +106,6 @@ No resources.
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the GKE cluster | `string` | n/a | yes |
 | <a name="input_cluster_secondary_range_cidr"></a> [cluster\_secondary\_range\_cidr](#input\_cluster\_secondary\_range\_cidr) | The secondary range to use for pods | `string` | n/a | yes |
 | <a name="input_cluster_secondary_range_name"></a> [cluster\_secondary\_range\_name](#input\_cluster\_secondary\_range\_name) | The name of the secondary range to use for pods | `string` | `"gke-pods"` | no |
-| <a name="input_jump_host_ip_address"></a> [jump\_host\_ip\_address](#input\_jump\_host\_ip\_address) | The internal IP address of the jump host | `string` | n/a | yes |
 | <a name="input_jump_host_ip_address_name"></a> [jump\_host\_ip\_address\_name](#input\_jump\_host\_ip\_address\_name) | Name of the IP address resource | `string` | `"jump-host-ip"` | no |
 | <a name="input_jump_host_name"></a> [jump\_host\_name](#input\_jump\_host\_name) | The name of the jump host VM | `string` | `"jump-host"` | no |
 | <a name="input_master_authorized_cidr_blocks"></a> [master\_authorized\_cidr\_blocks](#input\_master\_authorized\_cidr\_blocks) | The CIDR block allowed to connect to the master node | <pre>list(object({<br/>    cidr_block   = string<br/>    display_name = string<br/>  }))</pre> | <pre>[<br/>  {<br/>    "cidr_block": "10.0.0.7/32",<br/>    "display_name": "Network 1"<br/>  },<br/>  {<br/>    "cidr_block": "192.168.1.0/24",<br/>    "display_name": "Network 2"<br/>  }<br/>]</pre> | no |

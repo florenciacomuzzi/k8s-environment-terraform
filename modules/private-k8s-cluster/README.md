@@ -1,5 +1,5 @@
 # private-k8s-cluster
-This is an opinionated Terraform module to create a GKE private cluster with autoscaling and 
+This is an opinionated Terraform module to create a GKE private cluster with autoscaling and
 node autoprivisioning. A jump host is created to access the cluster's master node.
 
 
@@ -16,20 +16,20 @@ node autoprivisioning. A jump host is created to access the cluster's master nod
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 5.29.1 |
+| <a name="provider_google"></a> [google](#provider\_google) | 6.27.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.7.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_cloud-nat"></a> [cloud-nat](#module\_cloud-nat) | terraform-google-modules/cloud-nat/google | ~> 1.2 |
+| <a name="module_cloud-nat"></a> [cloud-nat](#module\_cloud-nat) | terraform-google-modules/cloud-nat/google | ~> 5.3.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [google_compute_address.my_internal_ip_addr](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address) | resource |
+| [google_compute_address.static_ip](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_address) | resource |
 | [google_compute_firewall.rules](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall) | resource |
 | [google_compute_instance.default](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance) | resource |
 | [google_compute_router.router](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router) | resource |
@@ -49,7 +49,6 @@ node autoprivisioning. A jump host is created to access the cluster's master nod
 | <a name="input_cluster_autoscaling_max_memory_gb"></a> [cluster\_autoscaling\_max\_memory\_gb](#input\_cluster\_autoscaling\_max\_memory\_gb) | The maximum memory usage across all node pools to trigger the cluster autoscaler to provision more node pools | `string` | `"32"` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the GKE cluster | `string` | n/a | yes |
 | <a name="input_cluster_secondary_range_name"></a> [cluster\_secondary\_range\_name](#input\_cluster\_secondary\_range\_name) | The name of the secondary range to use for pods | `string` | `"gke-pods"` | no |
-| <a name="input_jump_host_ip_address"></a> [jump\_host\_ip\_address](#input\_jump\_host\_ip\_address) | The internal IP address of the jump host | `string` | `"0.0.0.0"` | no |
 | <a name="input_jump_host_ip_address_name"></a> [jump\_host\_ip\_address\_name](#input\_jump\_host\_ip\_address\_name) | Name of the IP address resource | `string` | `"jump-host-ip"` | no |
 | <a name="input_jump_host_name"></a> [jump\_host\_name](#input\_jump\_host\_name) | The name of the jump host VM | `string` | `"jump-host"` | no |
 | <a name="input_master_authorized_cidr_blocks"></a> [master\_authorized\_cidr\_blocks](#input\_master\_authorized\_cidr\_blocks) | The CIDR blocks allowed to connect to the master node | <pre>list(object({<br/>    cidr_block   = string<br/>    display_name = string<br/>  }))</pre> | n/a | yes |

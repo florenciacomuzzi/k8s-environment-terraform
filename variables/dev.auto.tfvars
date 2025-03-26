@@ -26,6 +26,6 @@ node_pools = [
     total_max_node_count = 3
   }
 ]
-jump_host_ip_address      = "10.0.0.7"
+# jump_host_ip_address      = "10.0.0.7"
 jump_host_ip_address_name = "my-ip"
 jump_host_name            = "jump-host"

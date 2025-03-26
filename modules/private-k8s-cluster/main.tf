@@ -131,15 +131,24 @@ resource "google_container_node_pool" "gke_nodes" {
 }
 
 # Create jump host to access private k8s cluster
-resource "google_compute_address" "my_internal_ip_addr" {
-  project      = var.project_id
-  address_type = "INTERNAL"
-  region       = var.region
-  subnetwork   = var.subnet_name
+# resource "google_compute_address" "my_internal_ip_addr" {
+#   project      = var.project_id
+#   address_type = "INTERNAL"
+#   region       = var.region
+#   subnetwork   = var.subnet_name
+#   name         = var.jump_host_ip_address_name
+#   address      = var.jump_host_ip_address
+#   description  = "An internal IP address for jump host"
+# }
+
+resource "google_compute_address" "static_ip" {
   name         = var.jump_host_ip_address_name
-  address      = var.jump_host_ip_address
-  description  = "An internal IP address for jump host"
+  address_type = "EXTERNAL"
+  network_tier = "PREMIUM"
+  project      = var.project_id
+  region       = var.region
 }
+
 
 resource "google_compute_instance" "default" {
   project      = var.project_id
@@ -163,7 +172,8 @@ resource "google_compute_instance" "default" {
   network_interface {
     network    = var.network_name
     subnetwork = var.subnet_name # Replace with a reference or self link to your subnet, in quotes
-    network_ip = google_compute_address.my_internal_ip_addr.address
+    # network_ip = google_compute_address.my_internal_ip_addr.address
+    network_ip = google_compute_address.static_ip.address
   }
 
   metadata = {

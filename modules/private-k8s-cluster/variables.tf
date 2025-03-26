@@ -87,11 +87,11 @@ variable "jump_host_ip_address_name" {
   description = "Name of the IP address resource"
 }
 
-variable "jump_host_ip_address" {
-  type        = string
-  default     = "0.0.0.0"
-  description = "The internal IP address of the jump host"
-}
+# variable "jump_host_ip_address" {
+#   type        = string
+#   default     = "0.0.0.0"
+#   description = "The internal IP address of the jump host"
+# }
 
 variable "jump_host_name" {
   type        = string
