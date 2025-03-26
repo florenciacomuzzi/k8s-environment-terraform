@@ -173,7 +173,10 @@ resource "google_compute_instance" "default" {
     network    = var.network_name
     subnetwork = var.subnet_name # Replace with a reference or self link to your subnet, in quotes
     # network_ip = google_compute_address.my_internal_ip_addr.address
-    network_ip = google_compute_address.static_ip.address
+    # network_ip = google_compute_address.static_ip.address
+    access_config {
+      nat_ip = google_compute_address.static_ip.address
+    }
   }
 
   metadata = {
@@ -194,6 +197,20 @@ resource "google_compute_firewall" "rules" {
   }
   # Fixed IAP source range
   source_ranges = ["35.235.240.0/20"]
+}
+
+# TODO add firewall rules for ingress and egress for port 2087
+resource "google_compute_firewall" "cpanel" {
+  project = var.project_id
+  name    = "allow-ssh"
+  network = var.network_name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "2080-2089", "80", "443"]
+  }
+  # Fixed IAP source range
+  source_ranges = ["0.0.0/0"]
 }
 
 resource "google_service_account" "jump_host" {
